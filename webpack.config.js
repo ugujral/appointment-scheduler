@@ -1,44 +1,45 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const combinedLoaders = require('webpack-combine-loaders');
 
-const SRC_DIR = path.join(__dirname, './client/src');
-const DIST_DIR = path.join(__dirname, './public');
+const SRC_DIR = path.join(__dirname, '/client/src');
+const DIST_DIR = path.join(__dirname, '/public');
 
 module.exports = {
   mode: 'development',
   entry: `${SRC_DIR}/index.jsx`,
-  module: {
-    rules: [{
-      test: /\.scss$/,
-      use: [
-        process.env.NODE_ENV !== 'production' ? 'style-loader' : MiniCssExtractPlugin.loader,
-        'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-        'sass-loader',
-      ],
-    },
-    {
-      test: /\.jsx?/,
-      include: SRC_DIR,
-      exclude: /node_modules/,
-      use: [{
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env', '@babel/preset-react'],
-        },
-      }],
-      resolve: {
-        extensions: ['.js', '.jsx'],
-      },
-    }],
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-  ],
   output: {
     filename: 'bundle.js',
     path: DIST_DIR,
+  },
+  module: {
+    rules: [
+      {
+        loader: 'babel-loader',
+        test: /\.jsx?/,
+        exclude: /node_modules/,
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+        },
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        loader: combinedLoaders([
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              modules: true,
+            },
+          },
+        ]),
+      },
+    ],
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.css'],
   },
 };
