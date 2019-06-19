@@ -5,12 +5,12 @@
 npm
 npm-debug.log
 node_modules/
+package-lock.json
 
 pids
 *.pid
 logs
 *.log
 
-# Compiled Dirs (http://nodejs.org/api/addons.html)
-build/
-dist/
+## Webpack ##
+bundle.js

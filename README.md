@@ -1,10 +1,6 @@
-# project-title
+# Appointment Scheduler App
 
-> Description
-
-# Project Name
-
-> Description
+> This is an appointment app for Well Health Challenge. This project is built using the MERN stack(MongoDB, Express, ReactJS, NodeJS).
 
 ## Usage
 

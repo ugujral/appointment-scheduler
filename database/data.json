@@ -1,0 +1,11 @@
+[
+  {
+    "patientId": 0,
+    "firstName": "Well",
+    "lastName": "Health",
+    "phoneNumber": "833-234-9355",
+    "email": "wellhealth@gmail.com",
+    "appointmentDate": "06-20-2019",
+    "appointmentTime": "01:00 PM - 02:00 PM"
+  }
+]
